@@ -1,0 +1,30 @@
+/* Gaya halaman login, di-scope ke .login-page agar tidak bentrok dengan styles.css */
+.login-page * { box-sizing: border-box; margin: 0; }
+.login-page { --card: #3b82f6; --btn: #2563eb; --field: #e8eef8; min-height: 100vh; display: grid; place-items: center; padding: 28px 16px; background: #f4f8ff; font-family: Inter, "Segoe UI", system-ui, -apple-system, Roboto, sans-serif; color: #fff; }
+.login-page .wrap { width: min(400px, 100%); display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.login-page .logo { width: 34px; height: 42px; }
+.login-page .card { width: 100%; background: var(--card); border-radius: 4px; padding: 26px 28px 26px; box-shadow: 0 6px 20px rgba(37, 99, 235, .18); text-align: center; }
+.login-page .card h1 { font-size: 20px; font-weight: 700; }
+.login-page .card .tag { font-size: 8px; opacity: .85; margin: 2px 0 20px; }
+.login-page .field { position: relative; margin-bottom: 12px; }
+.login-page .field input { width: 100%; height: 38px; padding: 0 40px 0 42px; border: 0; border-radius: 3px; background: var(--field); color: #26303b; font: 400 14px inherit; font-family: inherit; }
+.login-page .field input::placeholder { color: #7a8595; }
+.login-page .field input:focus { outline: 2px solid #fff; outline-offset: 1px; }
+.login-page .field .ico { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; color: #4b5563; pointer-events: none; }
+.login-page .eye { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border: 0; background: transparent; color: #26303b; cursor: pointer; display: grid; place-items: center; border-radius: 4px; }
+.login-page .eye svg { width: 22px; height: 22px; }
+.login-page .eye .off { display: none; }
+.login-page .eye.on .off { display: block; }
+.login-page .eye.on .show { display: none; }
+.login-page .error { display: none; background: #fff; color: #b42318; border-radius: 3px; padding: 8px 10px; font-size: 12.5px; margin-bottom: 12px; text-align: left; }
+.login-page .error.show { display: block; }
+.login-page .submit { width: 100%; height: 40px; margin-top: 12px; border: 1px solid #1d4fc4; border-radius: 3px; background: var(--btn); color: #fff; font: 600 14px inherit; font-family: inherit; cursor: pointer; }
+.login-page .submit:hover { background: #1f56d6; }
+.login-page .submit:disabled { opacity: .7; cursor: wait; }
+.login-page .forgot { display: inline-block; margin-top: 12px; color: #fff; font-weight: 600; font-size: 14px; text-decoration: underline; background: none; border: 0; cursor: pointer; font-family: inherit; }
+.login-page .notice { display: none; margin-top: 10px; font-size: 12px; background: rgba(255,255,255,.18); border-radius: 3px; padding: 8px 10px; }
+.login-page .notice.show { display: block; }
+.login-page .demo { width: 100%; font-size: 12px; color: #5b6878; text-align: center; }
+.login-page .demo button { border: 0; background: #e6eefb; color: #1d4fc4; border-radius: 12px; padding: 4px 10px; margin: 3px 2px; font: 500 12px inherit; font-family: inherit; cursor: pointer; }
+.login-page .demo button:hover { background: #d5e3fa; }
+.login-page :focus-visible { outline: 2px solid #fff; outline-offset: 2px; }

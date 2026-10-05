@@ -1,0 +1,1191 @@
+/* =========================================================
+   shared.css — dimuat SETELAH styles.css di semua halaman.
+   Menyeragamkan sidebar, submenu Pengaturan, dan menu akun.
+   ========================================================= */
+:root { --fm-blue: var(--blue, #1b64d8); --fm-ink: #26303b; --fm-line: #dfe5ec; }
+
+body .sidebar {
+    width: 188px; min-width: 188px; flex: 0 0 188px;
+    background: #fff; border-right: 1px solid var(--fm-line);
+}
+@media (max-width: 760px) {
+    body .sidebar { width: 64px; min-width: 64px; flex-basis: 64px; }
+}
+
+/* =========================================================
+   Halaman bisa di-scroll ke bawah (semua halaman)
+   ========================================================= */
+html, body { height: auto; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
+body .topbar { position: sticky; top: 0; z-index: 1000; }
+body .topbar { overflow: visible !important; }
+body .layout, body .app-layout { height: auto !important; min-height: calc(100vh - 61px); overflow: visible !important; align-items: stretch; }
+body .main-content { height: auto !important; min-height: 0; overflow: visible !important; min-width: 0; }
+body .sidebar {
+    position: sticky;
+    top: 61px;
+    align-self: stretch;
+    height: auto !important;
+    min-height: calc(100vh - 61px);
+    overflow-y: auto;
+}
+
+/* =========================================================
+   Menu akun & Edit Profil
+   ========================================================= */
+.avatar.has-photo { background-size: cover; background-position: center; color: transparent; }
+
+/* Responsif bersama untuk seluruh halaman */
+*, *::before, *::after { box-sizing: border-box; }
+body { min-width: 320px; }
+body #root { width: 100%; max-width: none; text-align: left; border-inline: 0; }
+body .content, body .main-content { flex: 1 1 auto; min-width: 0; max-width: 100%; }
+body .content img, body .main-content img, body .content canvas, body .main-content canvas { max-width: 100%; }
+body .table-card, body .device-card, body .table-wrapper,
+body .bottom-card:has(.permission-table), body .bottom-card:has(.citizen-table) {
+    min-width: 0;
+    max-width: 100%;
+}
+body .table-wrapper { width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+body .bottom-card:has(.permission-table), body .bottom-card:has(.citizen-table) {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+body .mobile-menu-toggle { display: none; }
+
+.back-to-top {
+    position: fixed; right: 18px; bottom: 18px; z-index: 1200;
+    width: 42px; height: 42px; border: 0; border-radius: 50%;
+    background: var(--fm-blue); color: #fff; box-shadow: 0 4px 14px rgba(20, 32, 51, .24);
+    font: 700 22px/1 "Segoe UI", system-ui, sans-serif; cursor: pointer;
+}
+.back-to-top:hover { filter: brightness(.92); }
+.back-to-top:focus-visible, .mobile-menu-toggle:focus-visible { outline: 3px solid #ffbf47; outline-offset: 2px; }
+
+@media (max-width: 1024px) {
+    body .content, body .main-content { padding-left: 14px; padding-right: 14px; }
+    body .sidebar { width: 168px; min-width: 168px; flex-basis: 168px; }
+}
+
+@media (max-width: 760px) {
+    body .layout, body .app-layout { display: block; min-height: calc(100vh - 58px); }
+    body .sidebar {
+        position: fixed; top: 0; bottom: 0; left: 0; z-index: 1101;
+        width: min(250px, calc(100vw - 48px)); min-width: 0; height: auto !important;
+        min-height: 0 !important; overflow-x: visible; overflow-y: auto;
+        transform: translateX(calc(-100% + 52px)); transition: transform .22s ease;
+        box-shadow: 2px 0 14px rgba(20, 32, 51, .12);
+    }
+    body .sidebar:has(.side-nav.is-open) {
+        transform: translateX(0); box-shadow: 0 0 0 100vmax rgba(15, 25, 39, .42);
+    }
+    body .sidebar-promo, body .sidebar-flood { display: none; }
+    body .content, body .main-content { width: 100%; padding: 12px; }
+    body .page-header, body .history-header { height: auto; flex-wrap: wrap; gap: 10px; }
+    body .dashboard-grid, body .content-grid, body .bottom-grid { grid-template-columns: minmax(0, 1fr); }
+    body .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    body .right-panel { grid-template-columns: minmax(0, 1fr); }
+    body .filter-card, body .filter-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    body .data-sensor-page .layout { display: block; }
+    body .data-sensor-page .sidebar { width: min(250px, calc(100vw - 48px)); min-width: 0; }
+}
+
+@media (max-width: 420px) {
+    body .stats-grid, body .filter-card, body .filter-bar { grid-template-columns: minmax(0, 1fr); }
+    .back-to-top { right: 12px; bottom: 12px; }
+}
+
+/* Kartu status, pairing, dan aksi perangkat */
+body .device-management-page .bottom-grid {
+    flex: 0 1 auto;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+    grid-auto-rows: minmax(150px, auto);
+    min-width: 0;
+}
+body .device-management-page .bottom-card {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 150px;
+    overflow-wrap: anywhere;
+}
+body .device-management-page .mini-info p {
+    min-width: 0;
+    align-items: flex-start;
+    gap: 6px;
+    overflow-wrap: anywhere;
+}
+body .device-management-page .qr-content > div:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+body .device-management-page .add-device,
+body .device-management-page .form-step input,
+body .device-management-page .form-step select {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Tabel Pengguna & Role: tabel undangan tidak mewarisi min-width global. */
+body[data-page="pengguna-role"] .invitation-card {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+body[data-page="pengguna-role"] .invitation-card table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+}
+body[data-page="pengguna-role"] #userTable {
+    min-width: 700px;
+    table-layout: fixed;
+}
+body[data-page="pengguna-role"] #userTable th,
+body[data-page="pengguna-role"] #userTable td {
+    font-size: 7px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+body[data-page="pengguna-role"] #userTable th { white-space: normal; }
+body[data-page="pengguna-role"] #userTable td { height: 38px; }
+body[data-page="pengguna-role"] #userTable .user-name {
+    min-width: 0;
+    white-space: normal;
+}
+
+/* Tabel perangkat tetap di dalam wrapper dan isi sel boleh membungkus. */
+body .device-management-page .device-card table { min-width: 560px; }
+body .device-management-page .device-card th,
+body .device-management-page .device-card td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    vertical-align: middle;
+}
+
+@media (max-width: 760px) {
+    body .device-management-page .filter-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body .device-management-page .table-search { grid-column: 1 / -1; min-width: 0; }
+    body .device-management-page .filter-bar select,
+    body .device-management-page .date-filter { min-width: 0; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* Keep the Saluran Notifikasi sidebar aligned with the shared mobile drawer. */
+@media (max-width: 760px) {
+    body.notification-page .layout {
+        display: block !important;
+        min-height: calc(100vh - 58px);
+        margin-top: 0;
+    }
+    body.notification-page .sidebar {
+        position: fixed;
+        top: 0;
+        right: auto;
+        bottom: 0;
+        left: 0;
+        width: min(250px, calc(100vw - 48px)) !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        height: auto !important;
+        min-height: 0 !important;
+        transform: translateX(calc(-100% + 52px));
+        transition: transform .22s ease;
+        z-index: 1101;
+    }
+    body.notification-page .sidebar:has(.side-nav.is-open) {
+        transform: translateX(0);
+    }
+    body.notification-page .sidebar .side-nav:not(.is-open) .settings-group.open .side-text,
+    body.notification-page .sidebar .side-nav:not(.is-open) .settings-submenu {
+        display: none !important;
+    }
+    body.notification-page .content {
+        width: 100% !important;
+        padding: 12px;
+    }
+}
+
+/* =========================================================
+   TAMBAHAN: Modal Edit Profil, Toast, dll.
+   (append di akhir shared.css)
+========================================================= */
+.avatar.has-photo {
+  background-size: cover;
+  background-position: center;
+  color: transparent;
+}
+
+.profile-dialog {
+  border: 0;
+  border-radius: 12px;
+  padding: 0;
+  width: min(440px, calc(100vw - 24px));
+  max-height: calc(100vh - 32px);
+  box-shadow: 0 24px 60px rgba(10, 24, 44, .3);
+  color: var(--fm-ink, #26303b);
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.profile-dialog::backdrop {
+  background: rgba(10, 24, 44, .45);
+}
+
+.profile-dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 22px;
+}
+
+.profile-dialog header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-dialog h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.profile-dialog .pf-x {
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: #66727f;
+}
+
+.profile-dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-dialog input {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--fm-line, #dfe5ec);
+  border-radius: 7px;
+  font: 400 13px inherit;
+  font-family: inherit;
+}
+
+.profile-dialog input:focus {
+  outline: 2px solid var(--fm-blue, #1b64d8);
+  border-color: var(--fm-blue, #1b64d8);
+}
+
+.profile-dialog input:disabled {
+  background: #f3f6f9;
+  color: #7a8592;
+}
+
+.profile-dialog fieldset {
+  border: 1px solid var(--fm-line, #dfe5ec);
+  border-radius: 8px;
+  padding: 10px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.profile-dialog legend {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.profile-dialog legend small {
+  font-weight: 400;
+  color: #7a8592;
+}
+
+.pf-photo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pf-photo > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.pf-photo small {
+  flex-basis: 100%;
+  color: #7a8592;
+  font-size: 11px;
+}
+
+.pf-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--fm-blue, #1b64d8);
+  color: #fff;
+  font-size: 26px;
+  font-weight: 600;
+  flex: 0 0 64px;
+}
+
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--fm-line, #dfe5ec);
+  border-radius: 7px;
+  background: #fff;
+  font: 600 12px "Segoe UI", system-ui, sans-serif;
+  cursor: pointer;
+  color: var(--fm-ink, #26303b);
+}
+
+.pf-btn:hover {
+  background: #f1f6ff;
+}
+
+.pf-btn.primary {
+  background: var(--fm-blue, #1b64d8);
+  border-color: var(--fm-blue, #1b64d8);
+  color: #fff;
+}
+
+.pf-btn.primary:hover {
+  filter: brightness(.93);
+}
+
+.pf-error {
+  min-height: 16px;
+  margin: 0;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.profile-dialog footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.fm-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5000;
+  background: #14243a;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font: 500 13px "Segoe UI", system-ui, sans-serif;
+  transition: .25s;
+}
+
+.fm-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Akun di topbar */
+.fm-account-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.fm-account-text b {
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fm-account-text small {
+  font-size: 11px;
+  color: #66727f;
+}
+
+.fm-caret {
+  font-size: 13px;
+  color: #66727f;
+}
+
+@media (max-width: 640px) {
+  .fm-account-text,
+  .fm-caret {
+    display: none;
+  }
+}
+
+/* Mobile menu toggle */
+body .mobile-menu-toggle {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  body .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+.back-to-top:focus-visible,
+.mobile-menu-toggle:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   FIX LAYOUT UTAMA - SIDEBAR HARUS DI SAMPING
+   ========================================================= */
+
+body.notification-page,
+body.notification-page #root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body.notification-page {
+  overflow-x: hidden;
+}
+
+/* TOPBAR */
+body.notification-page .topbar {
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+body.notification-page .layout {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  margin-top: 64px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+body.notification-page .sidebar {
+  flex: 0 0 196px !important;
+  width: 196px !important;
+  min-width: 196px !important;
+  max-width: 196px !important;
+
+  height: calc(100vh - 64px);
+  position: sticky;
+  top: 64px;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  box-sizing: border-box;
+  background: #ffffff;
+
+  border-right: 1px solid #dfe5ec;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  z-index: 900;
+}
+
+/* =========================================================
+   SIDENAV
+   ========================================================= */
+
+body.notification-page .sidebar > .sidenav,
+body.notification-page .sidebar nav,
+body.notification-page .sidebar .side-nav {
+  width: 100% !important;
+  flex: 0 0 auto;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  box-sizing: border-box;
+}
+
+/* Link menu harus vertikal */
+body.notification-page .sidebar .sidenav a,
+body.notification-page .sidebar nav a,
+body.notification-page .sidebar .side-nav a {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+
+  white-space: normal;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+body.notification-page .content {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+
+  box-sizing: border-box;
+
+  padding: 24px 28px;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   CEGAH ELEMENT DALAM CONTENT MENARIK SIDEBAR
+   ========================================================= */
+
+body.notification-page .content > * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SIDEBAR FLOOD IMAGE
+   ========================================================= */
+
+body.notification-page .sidebar-flood {
+  width: calc(100% - 32px) !important;
+  margin: auto 16px 16px !important;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  position: relative;
+}
+
+body.notification-page .sidebar-flood .flood-image {
+  width: 100%;
+  height: 180px;
+
+  background-size: cover;
+  background-position: center;
+}
+
+body.notification-page .sidebar-flood .flood-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 14px;
+
+  box-sizing: border-box;
+
+  color: #fff;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 30, 70, 0.9),
+    rgba(0, 30, 70, 0.15)
+  );
+}
+
+/* =========================================================
+   TOPBAR AGAR TIDAK MENDORONG CONTENT
+   ========================================================= */
+
+body.notification-page .topbar > * {
+  flex-shrink: 0;
+}
+
+body.notification-page .global-search {
+  flex: 0 1 380px;
+  min-width: 180px;
+}
+
+body.notification-page .top-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  body.notification-page .sidebar {
+    flex-basis: 180px !important;
+    width: 180px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+  }
+
+  body.notification-page .content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 800px) {
+  body.notification-page .layout {
+    flex-direction: column !important;
+  }
+
+  body.notification-page .sidebar {
+    position: relative;
+    top: 0;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto;
+
+    border-right: none;
+    border-bottom: 1px solid #dfe5ec;
+  }
+
+  body.notification-page .sidebar-flood {
+    display: none;
+  }
+
+  body.notification-page .content {
+    width: 100% !important;
+    padding: 16px;
+  }
+}
+
+
+
+/* =========================================================
+   PROFIL & KEAMANAN
+========================================================= */
+
+.profile-security-page {
+  background: #f4f7fb;
+  color: #0f172a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================================
+   TOP PROFILE GRID
+========================================================= */
+
+.profile-top-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.profile-card,
+.password-card,
+.login-session-card,
+.notification-card,
+.theme-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 12px 4px;
+  color: #1e293b;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-body {
+  display: flex;
+  gap: 18px;
+  padding: 4px 20px 14px;
+}
+
+.profile-photo-area {
+  width: 115px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.profile-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 52px;
+  filter: grayscale(30%);
+  margin: 3px 0 8px;
+}
+
+.photo-button {
+  border: none;
+  background: #2463e9;
+  color: white;
+  border-radius: 3px;
+  font-size: 11px;
+  padding: 7px 19px;
+  cursor: pointer;
+}
+
+.profile-form {
+  flex: 1;
+}
+
+.profile-form label,
+.password-form label {
+  display: block;
+  font-size: 11px;
+  margin: 5px 0 3px;
+  color: #1e293b;
+}
+
+.blue-input {
+  height: 31px;
+  background: #2863e5;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  color: #101b35;
+}
+
+.blue-input span {
+  font-size: 12px;
+  margin-right: 7px;
+}
+
+.blue-input input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 11px;
+  color: #10285e;
+}
+
+.profile-divider {
+  border-top: 1px solid #e5e7eb;
+  margin-top: 13px;
+}
+
+.profile-save {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.profile-save button {
+  border: none;
+  background: #2463e9;
+  color: white;
+  border-radius: 4px;
+  padding: 7px 13px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   PASSWORD
+========================================================= */
+
+.password-form {
+  padding: 3px 16px 14px;
+}
+
+.password-form input {
+  width: 100%;
+  height: 31px;
+  box-sizing: border-box;
+  border: none;
+  background: #2863e5;
+  border-radius: 6px;
+  outline: none;
+  padding: 0 10px;
+  color: #112e70;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.password-form input::placeholder {
+  color: #183d88;
+}
+
+.password-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 17px;
+}
+
+.cancel-button {
+  width: 87px;
+  height: 23px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.change-password-button {
+  height: 23px;
+  border: none;
+  border-radius: 4px;
+  padding: 0 9px;
+  background: #2463e9;
+  color: #111827;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   BOTTOM GRID
+========================================================= */
+
+.profile-bottom-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 0.6fr;
+  gap: 8px;
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.card-heading {
+  padding: 15px 18px 8px;
+}
+
+.card-heading h3 {
+  font-size: 12px;
+  margin: 0 0 3px;
+}
+
+.card-heading p {
+  margin: 0;
+  font-size: 8px;
+  color: #475569;
+}
+
+
+/* =========================================================
+   SESSION
+========================================================= */
+
+.session-list {
+  padding: 0 10px;
+}
+
+.session-item {
+  min-height: 42px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  box-sizing: border-box;
+}
+
+.session-icon {
+  width: 30px;
+  font-size: 22px;
+}
+
+.session-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.session-info strong {
+  display: block;
+  font-size: 10px;
+}
+
+.session-info span {
+  display: block;
+  font-size: 7px;
+  color: #475569;
+  margin-top: 2px;
+}
+
+.session-status {
+  text-align: right;
+}
+
+.session-status strong {
+  display: block;
+  color: #21b66f;
+  font-size: 9px;
+}
+
+.session-status span {
+  display: block;
+  font-size: 7px;
+  color: #475569;
+  margin-top: 4px;
+}
+
+.logout-all-button {
+  float: right;
+  margin: 4px 10px 8px;
+  border: none;
+  background: #a9c1ff;
+  color: #152a5d;
+  border-radius: 4px;
+  font-size: 9px;
+  padding: 6px 13px;
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-card {
+  padding-bottom: 6px;
+}
+
+.notification-item {
+  min-height: 40px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  padding: 4px 10px;
+  box-sizing: border-box;
+}
+
+.notification-item-icon {
+  width: 29px;
+  font-size: 18px;
+}
+
+.notification-info {
+  flex: 1;
+}
+
+.notification-info strong {
+  display: block;
+  font-size: 9px;
+}
+
+.notification-info span {
+  display: block;
+  font-size: 6.5px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.switch {
+  width: 31px;
+  height: 16px;
+  border: none;
+  border-radius: 20px;
+  background: #cbd5e1;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.switch span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.switch.active {
+  background: #3478e8;
+}
+
+.switch.active span {
+  transform: translateX(15px);
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+.theme-card {
+  padding-bottom: 8px;
+}
+
+.theme-option {
+  min-height: 52px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  margin: 3px 9px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-option.selected {
+  background: #ffffff;
+}
+
+.theme-icon {
+  width: 30px;
+  font-size: 22px;
+}
+
+.theme-option strong {
+  font-size: 10px;
+}
+
+.theme-option p {
+  margin: 3px 0 0;
+  font-size: 6.5px;
+  color: #475569;
+}
+
+.radio {
+  margin-left: auto;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #111827;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   SUCCESS / ERROR
+========================================================= */
+
+.success-alert,
+.error-alert {
+  margin: 5px 9px;
+  min-height: 48px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding: 5px 8px;
+  box-sizing: border-box;
+}
+
+.success-alert {
+  background: #baf1ca;
+  border: 1px solid #69d98d;
+  color: #168342;
+}
+
+.error-alert {
+  background: #ffcaca;
+  border: 1px solid #ff8585;
+  color: #e02e2e;
+}
+
+.alert-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 7px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.alert-icon.success {
+  color: #3eae5c;
+}
+
+.alert-icon.error {
+  color: #ff3f3f;
+}
+
+.success-alert strong,
+.error-alert strong {
+  font-size: 9px;
+}
+
+.success-alert p {
+  margin: 3px 0 0;
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .profile-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .profile-body {
+    flex-direction: column;
+  }
+
+  .profile-photo-area {
+    width: 100%;
+  }
+}
